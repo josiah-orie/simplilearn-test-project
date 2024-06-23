@@ -8,9 +8,9 @@ pipeline {
     }
     options {
         // Set the timeout for the entire pipeline to avoid long-running jobs
-        timeout(time: 60, unit: 'MINUTES')
+      //  timeout(time: 60, unit: 'MINUTES')
         // Retry the build up to 3 times in case of transient issues
-        retry(3)
+        //retry(3)
     }
     environment{
         DockerURL = 'docker.io'
