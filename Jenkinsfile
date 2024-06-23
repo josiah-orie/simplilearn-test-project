@@ -21,6 +21,11 @@ pipeline {
     }
 
     stages {
+        stage('Check Docker Installation') {
+            steps {
+                sh 'docker --version'
+            }
+        }
         stage('SCM Checkout'){
             steps{
                 checkout poll: false, scm: scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/josiah-orie/simplilearn-test-project.git']])
