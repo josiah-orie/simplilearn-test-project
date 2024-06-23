@@ -5,7 +5,7 @@ pipeline {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "local_maven"
         git 'Default'
-        //dockerTool 'docker'
+        dockerTool 'docker'
     }
    // options {
         // Set the timeout for the entire pipeline to avoid long-running jobs
