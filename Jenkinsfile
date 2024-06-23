@@ -14,10 +14,9 @@ pipeline {
         //retry(3)
     }
     environment{
-        DockerURL = 'docker.io'
-        DockerRegistry = 'jossy10'
+        DOCKER_REGISTRY = 'docker.io'
         DOCKER_CREDENTIALS_ID = 'dockerhub'
-        DOCKER_IMAGE = 'Simplilearn-devops-Project-test'
+        DOCKER_IMAGE = 'jossy10/Simplilearn-devops-Project-test'
         
     }
 
@@ -44,7 +43,7 @@ pipeline {
                 echo 'Building project docker image  ...'
                 script{
                     try{
-                        def image = docker.build("${DockerRegistry}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                        def image = docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                     }catch (Exception e){
                         error "Docker build failed: ${e.message}"
                     }
