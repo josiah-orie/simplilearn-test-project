@@ -16,7 +16,7 @@ pipeline {
     environment{
         DockerURL = 'docker.io'
         DockerRegistry = 'jossy10'
-        DockerHub_Crededtials = 'dockerhub'
+        DOCKER_CREDENTIALS_ID = 'dockerhub'
         DOCKER_IMAGE = 'Simplilearn-devops-Project-test'
         
     }
