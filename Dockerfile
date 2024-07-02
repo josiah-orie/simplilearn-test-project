@@ -15,7 +15,7 @@ RUN mvn dependency:go-offline
 COPY src /home/app/src
 
 # Build the application
-RUN mvn clean package
+#RUN mvn clean package
 
 # Use a lightweight JDK image to run the application
 FROM openjdk:17-jdk-alpine
