@@ -5,15 +5,7 @@ pipeline {
 		mavenHome = tool 'myMaven'
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
 	}
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "myMaven"
-        git 'Default'
-        dockerTool 'myDocker'
-        DOCKER_REGISTRY = 'docker.io'
-        DOCKER_CREDENTIALS_ID = 'dockerhub'
-        DOCKER_IMAGE = 'jossy10/Simplilearn-devops-Project-test'
-    }
+    
    // options {
         // Set the timeout for the entire pipeline to avoid long-running jobs
       //  timeout(time: 60, unit: 'MINUTES')
@@ -49,7 +41,7 @@ pipeline {
                 echo 'Building project docker image  ...'
                 script{
                     try{
-                        def image = docker.build("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
+                        def image = docker.build("jossy10/Simplilearn-devops-Project-test:${env.BUILD_NUMBER}")
                     }catch (Exception e){
                         error "Docker build failed: ${e.message}"
                     }
