@@ -7,9 +7,9 @@ pipeline {
 	}
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "local_maven"
+        maven "myMaven"
         git 'Default'
-        dockerTool 'docker'
+        dockerTool 'myDocker'
         DOCKER_REGISTRY = 'docker.io'
         DOCKER_CREDENTIALS_ID = 'dockerhub'
         DOCKER_IMAGE = 'jossy10/Simplilearn-devops-Project-test'
