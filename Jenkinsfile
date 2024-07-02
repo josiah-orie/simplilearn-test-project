@@ -28,7 +28,8 @@ pipeline {
         }
         stage('SCM Checkout'){
             steps{
-                checkout poll: false, scm: scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/josiah-orie/simplilearn-test-project.git']])
+                //checkout poll: false, scm: scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/josiah-orie/simplilearn-test-project.git']])
+		echo 'checkout...'
             }
         }
         stage('Build') {
