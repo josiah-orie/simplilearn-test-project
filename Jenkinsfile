@@ -53,9 +53,9 @@ pipeline {
         }
         stage('Push Docker Image'){
             steps{
-                echo 'puching image to docker hub coming in next build ...'
+                echo 'pushing image to docker hub coming in next build ...'
 		script{
-			docker.withRegistry('','dockerhub'){
+			withDockerRegistry(credentialsId: 'dockerhub'){
 				image.push();
 				image.push('latest');
 			}
