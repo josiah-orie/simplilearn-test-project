@@ -1,11 +1,18 @@
 pipeline {
     agent any
-
+    environment{
+		dockerHome = tool 'myDocker'
+		mavenHome = tool 'myMaven'
+		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+	}
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "local_maven"
         git 'Default'
         dockerTool 'docker'
+        DOCKER_REGISTRY = 'docker.io'
+        DOCKER_CREDENTIALS_ID = 'dockerhub'
+        DOCKER_IMAGE = 'jossy10/Simplilearn-devops-Project-test'
     }
    // options {
         // Set the timeout for the entire pipeline to avoid long-running jobs
@@ -13,17 +20,10 @@ pipeline {
         // Retry the build up to 3 times in case of transient issues
         //retry(3)
   //  }
-    environment{
-        DOCKER_REGISTRY = 'docker.io'
-        DOCKER_CREDENTIALS_ID = 'dockerhub'
-        DOCKER_IMAGE = 'jossy10/Simplilearn-devops-Project-test'
-        
-    }
-
     stages {
         stage('Check Docker Installation') {
             steps {
-                sh 'docker --version'
+                sh 'docker version'
             }
         }
         stage('SCM Checkout'){
@@ -31,13 +31,13 @@ pipeline {
                 checkout poll: false, scm: scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/josiah-orie/simplilearn-test-project.git']])
             }
         }
-        //stage('Build') {
-           // steps {
+        stage('Build') {
+            steps {
                 // Get some code from a GitHub repository
                 //git 'https://github.com/josiah-orie/simplilearn-test-project.git'
 
                 // Run Maven on a Unix agent.
-              //  sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
