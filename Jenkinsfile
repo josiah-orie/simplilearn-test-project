@@ -54,12 +54,13 @@ pipeline {
         stage('Push Docker Image'){
             steps{
                 echo 'pushing image to docker hub coming in next build ...'
-		script{
-			withDockerRegistry(credentialsId: 'dockerhub'){
-				image.push();
-				image.push('latest');
-			}
-		}
+		sh 'docker push jossy10/simplilearn-devops-project-test:0.0.${env.BUILD_NUMBER}'
+//        		script{
+//        			withDockerRegistry(credentialsId: 'dockerhub'){
+//        				image.push();
+//        				image.push('latest');
+//        			}
+//        		}
             }
         }
         
